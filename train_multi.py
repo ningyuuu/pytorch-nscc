@@ -151,7 +151,7 @@ def train_single_model(params):
     params['cuda'] = torch.cuda.is_available()
 
     # log into the appropriate directory
-    utils.set_logger(os.path.join('experiments', params['exp_name'], 'train.log'))
+    utils.set_logger(os.path.join('train.log'))
 
     # Set the random seed for reproducible experiments
     torch.manual_seed(1337)
