@@ -25,9 +25,6 @@
 echo "change directory to $PBS_O_WORKDIR"
 cd "$PBS_O_WORKDIR" || exit $?
 
-echo "change directory to CascadedFCN"
-cd CascadedFCN
-
 # Specify which Docker image to use for container
 image="nvcr.io/nvidia/pytorch:18.08-py3"
 echo "Running nvidia-docker-run.."
