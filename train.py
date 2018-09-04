@@ -6,11 +6,12 @@ import os
 
 import numpy as np
 import torch
+import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Variable
 from tqdm import tqdm
 
-import utils
+from utils import utils
 import model.net as net
 import model.data_loader as data_loader
 from evaluate import evaluate
@@ -174,6 +175,10 @@ if __name__ == '__main__':
 
     # Define the model and optimizer
     model = net.Net(params).cuda() if params.cuda else net.Net(params)
+    if params.cuda and torch.cuda.device_count() > 1:
+        print('Using', torch.cuda.device_count(), 'GPUs.')
+        model = nn.DataParallel(model)
+
     optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
 
     # fetch loss function and metrics
