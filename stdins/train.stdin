@@ -1,1 +1,1 @@
-cd /home/users/nus/dprny/pytorch-nscc && python train.py
+cd /home/users/nus/dprny/pytorch-nscc && python train.py --model_dir $EXPERIMENT_NAME
