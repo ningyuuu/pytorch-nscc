@@ -36,6 +36,25 @@ class Params():
         """Gives dict-like access to Params instance by `params.dict['learning_rate']"""
         return self.__dict__
 
+class dotdict(dict):
+     """
+     dot.notation access to dictionary attributes
+     """
+     __getattr__ = dict.get
+     __setattr__ = dict.__setitem__
+     __delattr__ = dict.__delitem__
+
+class MultiParams():
+    """
+    Class to process multiple sets of params.
+    Each set of params exists as a member of an json array.
+    """
+    def __init__(self, json_path):
+        with open(json_path) as f:
+            self.params = [dotdict(param_dict) for param_dict in json.load(f)]
+
+    def get_params(self):
+        return self.params
 
 class RunningAverage():
     """A simple class that maintains the running average of a quantity

@@ -1,0 +1,1 @@
+cd /home/users/nus/dprny/pytorch-nscc && python train_multi.py
