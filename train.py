@@ -18,7 +18,7 @@ from evaluate import evaluate
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', default='data/64x64_SIGNS', help="Directory containing the dataset")
-parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
+parser.add_argument('--model_dir', default='base_model', help="Directory containing params.json")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
     # Load the parameters from json file
     args = parser.parse_args()
-    json_path = os.path.join(args.model_dir, 'params.json')
+    json_path = os.path.join('experiments', args.model_dir, 'params.json')
     assert os.path.isfile(json_path), "No json configuration file found at {}".format(json_path)
     params = utils.Params(json_path)
 
