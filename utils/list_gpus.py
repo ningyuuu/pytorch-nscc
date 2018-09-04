@@ -5,7 +5,7 @@ def count_print_devices():
     print('{} devices found'.format(device_count))
 
     for device in range(device_count):
-        print('Device {}: {}').format(device, torch.get_device_name(device))
+        print('Device {}: {}'.format(device, torch.get_device_name(device)))
     
     return device_count
 
