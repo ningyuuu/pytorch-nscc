@@ -3,6 +3,7 @@
 import argparse
 import logging
 import os
+from importlib import import_module
 
 import numpy as np
 import torch
@@ -12,7 +13,6 @@ from torch.autograd import Variable
 from tqdm import tqdm
 
 from utils import utils
-import model.net as net
 import model.data_loader as data_loader
 from utils.evaluate import evaluate
 
@@ -158,7 +158,7 @@ def train_single_model(params):
     if params.cuda: torch.cuda.manual_seed(1337)
 
     # dynamic import of net
-    net = __import__('model.{}'.format(params.model_name))
+    net = import_module('model.{}'.format(params.model_name))
     model = net.Net(params).cuda() if params.cuda else net.Net(params)
     if params.cuda and params.multi_gpu == 1 and torch.cuda.device_count() > 1:
         print('Using', torch.cuda.device_count(), 'GPUs.')
