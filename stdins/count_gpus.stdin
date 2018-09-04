@@ -1,0 +1,1 @@
+cd /home/users/nus/dprny/pytorch-nscc/utils && python list_gpus.py
