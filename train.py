@@ -14,7 +14,7 @@ from tqdm import tqdm
 from utils import utils
 import model.net as net
 import model.data_loader as data_loader
-from evaluate import evaluate
+from utils.evaluate import evaluate
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', default='data/64x64_SIGNS', help="Directory containing the dataset")

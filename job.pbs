@@ -30,6 +30,6 @@ image="nvcr.io/nvidia/pytorch:18.08-py3"
 echo "Running nvidia-docker-run.."
 
 # Pass the commands that you wish to run inside the container to the standard input of nvidia-docker-run
-nvidia-docker-run $image < stdins/train.stdin > stdout.$PBS_JOBID 2> stderr.$PBS_JOBID
+nvidia-docker-run $image < train.stdin > stdout.$PBS_JOBID 2> stderr.$PBS_JOBID
 nvidia-smi
 echo "Finished running.."
