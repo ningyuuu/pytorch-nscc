@@ -156,6 +156,9 @@ if __name__ == '__main__':
     # use GPU if available
     params.cuda = torch.cuda.is_available()
 
+    # Set the logger
+    utils.set_logger(os.path.join(args.model_dir, 'train.log'))
+
     # Set the random seed for reproducible experiments
     torch.manual_seed(230)
     if params.cuda: torch.cuda.manual_seed(230)
@@ -167,10 +170,6 @@ if __name__ == '__main__':
         print('Using', torch.cuda.device_count(), 'GPUs.')
         print()
         model = nn.DataParallel(model)
-
-    # Set the logger
-    utils.set_logger(os.path.join(args.model_dir, 'train.log'))
-
     # Create the input data pipeline
     logging.info("Loading the datasets...")
 
