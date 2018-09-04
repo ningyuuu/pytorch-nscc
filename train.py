@@ -175,8 +175,10 @@ if __name__ == '__main__':
 
     # Define the model and optimizer
     model = net.Net(params).cuda() if params.cuda else net.Net(params)
-    if params.cuda and torch.cuda.device_count() > 1:
+    if params.cuda and params.multi_gpu == 1 and torch.cuda.device_count() > 1:
+        print()
         print('Using', torch.cuda.device_count(), 'GPUs.')
+        print()
         model = nn.DataParallel(model)
 
     optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
