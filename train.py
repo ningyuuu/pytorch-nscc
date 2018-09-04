@@ -157,7 +157,7 @@ if __name__ == '__main__':
     params.cuda = torch.cuda.is_available()
 
     # Set the logger
-    utils.set_logger(os.path.join(args.model_dir, 'train.log'))
+    utils.set_logger(os.path.join('experiments', args.model_dir, 'train.log'))
 
     # Set the random seed for reproducible experiments
     torch.manual_seed(230)
@@ -188,5 +188,5 @@ if __name__ == '__main__':
 
     # Train the model
     logging.info("Starting training for {} epoch(s)".format(params.num_epochs))
-    train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics, params, args.model_dir,
+    train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics, params, 'experiments/'+args.model_dir,
                        args.restore_file)
