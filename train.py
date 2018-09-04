@@ -160,6 +160,14 @@ if __name__ == '__main__':
     torch.manual_seed(230)
     if params.cuda: torch.cuda.manual_seed(230)
 
+    # Define the model and optimizer
+    model = net.Net(params).cuda() if params.cuda else net.Net(params)
+    if params.cuda and params.multi_gpu == 1 and torch.cuda.device_count() > 1:
+        print()
+        print('Using', torch.cuda.device_count(), 'GPUs.')
+        print()
+        model = nn.DataParallel(model)
+
     # Set the logger
     utils.set_logger(os.path.join(args.model_dir, 'train.log'))
 
@@ -172,14 +180,6 @@ if __name__ == '__main__':
     val_dl = dataloaders['test']
 
     logging.info("- done.")
-
-    # Define the model and optimizer
-    model = net.Net(params).cuda() if params.cuda else net.Net(params)
-    if params.cuda and params.multi_gpu == 1 and torch.cuda.device_count() > 1:
-        print()
-        print('Using', torch.cuda.device_count(), 'GPUs.')
-        print()
-        model = nn.DataParallel(model)
 
     optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
 
